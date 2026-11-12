@@ -72,4 +72,14 @@ final class FrameAssemblerTests: XCTestCase {
         ])
         XCTAssertEqual(a.flush()?.contacts.map(\.id), [1])
     }
+
+    func testMissingContactIDFallsBackToSlot() {
+        var a = FrameAssembler()
+        _ = feed(&a, [
+            HIDElementValue(slot: 7, usagePage: 0x0D, usage: 0x42, value: 1, logicalMin: 0, logicalMax: 1, timestampNs: 5),
+            HIDElementValue(slot: 7, usagePage: 0x01, usage: 0x30, value: 0, logicalMin: 0, logicalMax: 100, timestampNs: 5),
+            HIDElementValue(slot: 7, usagePage: 0x01, usage: 0x31, value: 0, logicalMin: 0, logicalMax: 100, timestampNs: 5),
+        ])
+        XCTAssertEqual(a.flush()?.contacts.map(\.id), [FrameAssembler.syntheticIDBase + 7])
+    }
 }

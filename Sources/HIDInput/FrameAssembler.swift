@@ -84,7 +84,10 @@ public struct FrameAssembler: Sendable {
             guard var s = slots[key] else { continue }
             // Panels without a Tip Switch: a slot with coordinates counts as touching.
             let touching = s.tip ?? (s.x != nil && s.y != nil)
-            if let id = s.id, let x = s.x, let y = s.y, touching || s.wasTouching {
+            // Contact ID is only sent when it changes; if it was never seen (and priming failed),
+            // fall back to an id derived from the slot, which stays stable while the finger is down.
+            if let x = s.x, let y = s.y, touching || s.wasTouching {
+                let id = s.id ?? Self.syntheticIDBase + key
                 contacts.append(Contact(id: id, x: x, y: y, width: s.width, height: s.height, isTouching: touching))
             }
             s.wasTouching = touching
@@ -108,6 +111,9 @@ public struct FrameAssembler: Sendable {
             slots[key] = s
         }
     }
+
+    /// Ids at or above this value are synthetic (slot-derived), not reported by the panel.
+    public static let syntheticIDBase = 1000
 
     static func normalize(_ v: HIDElementValue) -> Double? {
         guard v.logicalMax > v.logicalMin else { return nil }
