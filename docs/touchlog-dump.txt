@@ -1,0 +1,156 @@
+Building for debugging...
+[0/3] Write swift-version--58304C5D6DBC2206.txt
+Build of product 'touchlog' complete! (0.30s)
+touchlog · macOS Version 15.8.2 (Build 24H232)
+Input Monitoring: granted
+9 device HID
+
+── 05ac:0281  "Magic Trackpad 2"  maker="Apple Inc."  transport=I2C  location=0x14400000
+   primary=0x01/0x02 Mouse
+   usagePairs=[0x01/0x02 Mouse, 0x01/0x01 Pointer, 0x0d/0x05 Touch Pad, 0xff00/0x0c]
+── 3554:f501  "Blake Wireless"  maker="C"  transport=USB  location=0x14400000
+   primary=0x01/0x02 Mouse
+   usagePairs=[0x01/0x02 Mouse, 0x01/0x01 Pointer, 0xff03/0x00, 0x0c/0x01, 0x01/0x80, 0xff02/0x02, 0xff04/0x02]
+── 05ac:0281  "Magic Trackpad 2"  maker="Apple Inc."  transport=I2C  location=0x14400000
+   primary=0x01/0x02 Mouse
+   usagePairs=[0x01/0x02 Mouse, 0x01/0x01 Pointer, 0x0d/0x05 Touch Pad, 0xff00/0x0c]
+── 05ac:ffff  "Keyboard"  maker="Apple"  transport=PS2  location=0x0
+   primary=0x01/0x06 Keyboard
+   usagePairs=[0x01/0x06 Keyboard]
+── 05ac:ffff  "Keyboard"  maker="Apple"  transport=?  location=0x0
+   primary=0x01/0x06 Keyboard
+   usagePairs=[0x01/0x06 Keyboard]
+── 3554:f501  "Blake Wireless"  maker="C"  transport=USB  location=0x14400000
+   primary=0x01/0x06 Keyboard
+   usagePairs=[0x01/0x06 Keyboard]
+── 2386:3118  "?"  maker="Apple"  transport=I2C  location=0x0
+   primary=0x0d/0x04 Touch Screen  [TOUCHSCREEN]
+   usagePairs=[0x0d/0x04 Touch Screen, 0xff00/0x01]
+   reportDescriptor (856 bytes):
+     05 0d 09 04 a1 01 85 0a 09 22 a1 02 09 42 15 00 25 01 75 01 95 01 81 02 95 01 81 03 95 01 81 03
+     25 1f 75 05 09 51 81 02 05 01 75 10 55 0e 65 11 09 30 26 80 07 35 00 46 77 0b 81 02 46 74 06 09
+     31 26 38 04 81 02 c0 05 0d 09 22 a1 02 09 42 15 00 25 01 75 01 95 01 81 02 95 01 81 03 95 01 81
+     03 25 1f 75 05 09 51 81 02 05 01 75 10 55 0e 65 11 09 30 26 80 07 35 00 46 77 0b 81 02 46 74 06
+     09 31 26 38 04 81 02 c0 05 0d 09 22 a1 02 09 42 15 00 25 01 75 01 95 01 81 02 95 01 81 03 95 01
+     81 03 25 1f 75 05 09 51 81 02 05 01 75 10 55 0e 65 11 09 30 26 80 07 35 00 46 77 0b 81 02 46 74
+     06 09 31 26 38 04 81 02 c0 05 0d 09 22 a1 02 09 42 15 00 25 01 75 01 95 01 81 02 95 01 81 03 95
+     01 81 03 25 1f 75 05 09 51 81 02 05 01 75 10 55 0e 65 11 09 30 26 80 07 35 00 46 77 0b 81 02 46
+     74 06 09 31 26 38 04 81 02 c0 05 0d 09 22 a1 02 09 42 15 00 25 01 75 01 95 01 81 02 95 01 81 03
+     95 01 81 03 25 1f 75 05 09 51 81 02 05 01 75 10 55 0e 65 11 09 30 26 80 07 35 00 46 77 0b 81 02
+     46 74 06 09 31 26 38 04 81 02 c0 05 0d 09 22 a1 02 09 42 15 00 25 01 75 01 95 01 81 02 95 01 81
+     03 95 01 81 03 25 1f 75 05 09 51 81 02 05 01 75 10 55 0e 65 11 09 30 26 80 07 35 00 46 77 0b 81
+     02 46 74 06 09 31 26 38 04 81 02 c0 05 0d 09 22 a1 02 09 42 15 00 25 01 75 01 95 01 81 02 95 01
+     81 03 95 01 81 03 25 1f 75 05 09 51 81 02 05 01 75 10 55 0e 65 11 09 30 26 80 07 35 00 46 77 0b
+     81 02 46 74 06 09 31 26 38 04 81 02 c0 05 0d 09 22 a1 02 09 42 15 00 25 01 75 01 95 01 81 02 95
+     01 81 03 95 01 81 03 25 1f 75 05 09 51 81 02 05 01 75 10 55 0e 65 11 09 30 26 80 07 35 00 46 77
+     0b 81 02 46 74 06 09 31 26 38 04 81 02 c0 05 0d 09 22 a1 02 09 42 15 00 25 01 75 01 95 01 81 02
+     95 01 81 03 95 01 81 03 25 1f 75 05 09 51 81 02 05 01 75 10 55 0e 65 11 09 30 26 80 07 35 00 46
+     77 0b 81 02 46 74 06 09 31 26 38 04 81 02 c0 05 0d 09 22 a1 02 09 42 15 00 25 01 75 01 95 01 81
+     02 95 01 81 03 95 01 81 03 25 1f 75 05 09 51 81 02 05 01 75 10 55 0e 65 11 09 30 26 80 07 35 00
+     46 77 0b 81 02 46 74 06 09 31 26 38 04 81 02 c0 05 0d 27 ff ff ff 0f 15 00 75 20 95 01 09 56 81
+     02 05 0d 09 54 95 01 75 08 15 00 25 0a 81 02 85 0b 09 55 b1 02 85 44 06 00 ff 09 c5 15 00 26 ff
+     00 75 08 96 00 01 b1 02 c0 06 00 ff 09 01 a1 01 85 01 95 3f 75 08 26 ff 00 15 00 09 01 91 02 85
+     05 95 3f 75 08 26 ff 00 15 00 09 01 91 02 85 02 95 3f 75 08 26 ff 00 15 00 09 01 81 02 85 03 95
+     3f 75 08 26 ff 00 15 00 09 01 91 02 85 04 95 3f 75 08 26 ff 00 15 00 09 01 91 02 85 06 95 3f 75
+     08 26 ff 00 15 00 09 01 81 02 85 07 95 3f 75 08 26 ff 00 15 00 09 01 91 02 85 08 95 3f 75 08 26
+     ff 00 15 00 09 01 91 02 85 09 95 3f 75 08 26 ff 00 15 00 09 01 81 02 c0
+   elements: cookie type usage logical[min..max] reportID size x count parent
+     #1 collection 0x0d/0x04 Touch Screen [0..0] rid=0 0x1 parent=-
+     #2 collection 0x0d/0x22 Finger [0..0] rid=0 0x1 parent=#1 0x0d/0x04 Touch Screen
+     #39 in-button 0x0d/0x42 Tip Switch [0..1] rid=10 1x1 parent=#2 0x0d/0x22 Finger
+     #49 in-misc 0x0d/0x51 Contact ID [0..31] rid=10 5x1 parent=#2 0x0d/0x22 Finger
+     #50 in-misc 0x01/0x30 X [0..1920] rid=10 16x1 parent=#2 0x0d/0x22 Finger
+     #51 in-misc 0x01/0x31 Y [0..1080] rid=10 16x1 parent=#2 0x0d/0x22 Finger
+     #3 collection 0x0d/0x22 Finger [0..0] rid=0 0x1 parent=#1 0x0d/0x04 Touch Screen
+     #40 in-button 0x0d/0x42 Tip Switch [0..1] rid=10 1x1 parent=#3 0x0d/0x22 Finger
+     #52 in-misc 0x0d/0x51 Contact ID [0..31] rid=10 5x1 parent=#3 0x0d/0x22 Finger
+     #53 in-misc 0x01/0x30 X [0..1920] rid=10 16x1 parent=#3 0x0d/0x22 Finger
+     #54 in-misc 0x01/0x31 Y [0..1080] rid=10 16x1 parent=#3 0x0d/0x22 Finger
+     #4 collection 0x0d/0x22 Finger [0..0] rid=0 0x1 parent=#1 0x0d/0x04 Touch Screen
+     #41 in-button 0x0d/0x42 Tip Switch [0..1] rid=10 1x1 parent=#4 0x0d/0x22 Finger
+     #55 in-misc 0x0d/0x51 Contact ID [0..31] rid=10 5x1 parent=#4 0x0d/0x22 Finger
+     #56 in-misc 0x01/0x30 X [0..1920] rid=10 16x1 parent=#4 0x0d/0x22 Finger
+     #57 in-misc 0x01/0x31 Y [0..1080] rid=10 16x1 parent=#4 0x0d/0x22 Finger
+     #5 collection 0x0d/0x22 Finger [0..0] rid=0 0x1 parent=#1 0x0d/0x04 Touch Screen
+     #42 in-button 0x0d/0x42 Tip Switch [0..1] rid=10 1x1 parent=#5 0x0d/0x22 Finger
+     #58 in-misc 0x0d/0x51 Contact ID [0..31] rid=10 5x1 parent=#5 0x0d/0x22 Finger
+     #59 in-misc 0x01/0x30 X [0..1920] rid=10 16x1 parent=#5 0x0d/0x22 Finger
+     #60 in-misc 0x01/0x31 Y [0..1080] rid=10 16x1 parent=#5 0x0d/0x22 Finger
+     #6 collection 0x0d/0x22 Finger [0..0] rid=0 0x1 parent=#1 0x0d/0x04 Touch Screen
+     #43 in-button 0x0d/0x42 Tip Switch [0..1] rid=10 1x1 parent=#6 0x0d/0x22 Finger
+     #61 in-misc 0x0d/0x51 Contact ID [0..31] rid=10 5x1 parent=#6 0x0d/0x22 Finger
+     #62 in-misc 0x01/0x30 X [0..1920] rid=10 16x1 parent=#6 0x0d/0x22 Finger
+     #63 in-misc 0x01/0x31 Y [0..1080] rid=10 16x1 parent=#6 0x0d/0x22 Finger
+     #7 collection 0x0d/0x22 Finger [0..0] rid=0 0x1 parent=#1 0x0d/0x04 Touch Screen
+     #44 in-button 0x0d/0x42 Tip Switch [0..1] rid=10 1x1 parent=#7 0x0d/0x22 Finger
+     #64 in-misc 0x0d/0x51 Contact ID [0..31] rid=10 5x1 parent=#7 0x0d/0x22 Finger
+     #65 in-misc 0x01/0x30 X [0..1920] rid=10 16x1 parent=#7 0x0d/0x22 Finger
+     #66 in-misc 0x01/0x31 Y [0..1080] rid=10 16x1 parent=#7 0x0d/0x22 Finger
+     #8 collection 0x0d/0x22 Finger [0..0] rid=0 0x1 parent=#1 0x0d/0x04 Touch Screen
+     #45 in-button 0x0d/0x42 Tip Switch [0..1] rid=10 1x1 parent=#8 0x0d/0x22 Finger
+     #67 in-misc 0x0d/0x51 Contact ID [0..31] rid=10 5x1 parent=#8 0x0d/0x22 Finger
+     #68 in-misc 0x01/0x30 X [0..1920] rid=10 16x1 parent=#8 0x0d/0x22 Finger
+     #69 in-misc 0x01/0x31 Y [0..1080] rid=10 16x1 parent=#8 0x0d/0x22 Finger
+     #9 collection 0x0d/0x22 Finger [0..0] rid=0 0x1 parent=#1 0x0d/0x04 Touch Screen
+     #46 in-button 0x0d/0x42 Tip Switch [0..1] rid=10 1x1 parent=#9 0x0d/0x22 Finger
+     #70 in-misc 0x0d/0x51 Contact ID [0..31] rid=10 5x1 parent=#9 0x0d/0x22 Finger
+     #71 in-misc 0x01/0x30 X [0..1920] rid=10 16x1 parent=#9 0x0d/0x22 Finger
+     #72 in-misc 0x01/0x31 Y [0..1080] rid=10 16x1 parent=#9 0x0d/0x22 Finger
+     #10 collection 0x0d/0x22 Finger [0..0] rid=0 0x1 parent=#1 0x0d/0x04 Touch Screen
+     #47 in-button 0x0d/0x42 Tip Switch [0..1] rid=10 1x1 parent=#10 0x0d/0x22 Finger
+     #73 in-misc 0x0d/0x51 Contact ID [0..31] rid=10 5x1 parent=#10 0x0d/0x22 Finger
+     #74 in-misc 0x01/0x30 X [0..1920] rid=10 16x1 parent=#10 0x0d/0x22 Finger
+     #75 in-misc 0x01/0x31 Y [0..1080] rid=10 16x1 parent=#10 0x0d/0x22 Finger
+     #11 collection 0x0d/0x22 Finger [0..0] rid=0 0x1 parent=#1 0x0d/0x04 Touch Screen
+     #48 in-button 0x0d/0x42 Tip Switch [0..1] rid=10 1x1 parent=#11 0x0d/0x22 Finger
+     #76 in-misc 0x0d/0x51 Contact ID [0..31] rid=10 5x1 parent=#11 0x0d/0x22 Finger
+     #77 in-misc 0x01/0x30 X [0..1920] rid=10 16x1 parent=#11 0x0d/0x22 Finger
+     #78 in-misc 0x01/0x31 Y [0..1080] rid=10 16x1 parent=#11 0x0d/0x22 Finger
+     #79 in-misc 0x0d/0x56 Scan Time [0..268435455] rid=10 32x1 parent=#1 0x0d/0x04 Touch Screen
+     #80 in-misc 0x0d/0x54 Contact Count [0..10] rid=10 8x1 parent=#1 0x0d/0x04 Touch Screen
+     #90 feature 0x0d/0x55 Contact Count Max [0..10] rid=11 8x1 parent=#1 0x0d/0x04 Touch Screen
+     #91 feature 0xff00/0xc5 [0..255] rid=68 2048x256 parent=#1 0x0d/0x04 Touch Screen
+     #12 collection 0xff00/0x01 [0..0] rid=0 0x1 parent=-
+     #81 in-misc 0xff00/0x01 [0..255] rid=2 504x63 parent=#12 0xff00/0x01
+     #82 in-misc 0xff00/0x01 [0..255] rid=6 504x63 parent=#12 0xff00/0x01
+     #83 in-misc 0xff00/0x01 [0..255] rid=9 504x63 parent=#12 0xff00/0x01
+     #84 output 0xff00/0x01 [0..255] rid=1 504x63 parent=#12 0xff00/0x01
+     #85 output 0xff00/0x01 [0..255] rid=5 504x63 parent=#12 0xff00/0x01
+     #86 output 0xff00/0x01 [0..255] rid=3 504x63 parent=#12 0xff00/0x01
+     #87 output 0xff00/0x01 [0..255] rid=4 504x63 parent=#12 0xff00/0x01
+     #88 output 0xff00/0x01 [0..255] rid=7 504x63 parent=#12 0xff00/0x01
+     #89 output 0xff00/0x01 [0..255] rid=8 504x63 parent=#12 0xff00/0x01
+     #14 type5 0x00/0xffffffff [0..0] rid=0 0x1 parent=-
+     #13 type5 0x00/0x00 [0..1] rid=0 1x1 parent=-
+     #16 type5 0x00/0xffffffff [0..0] rid=10 0x1 parent=-
+     #15 type5 0x00/0x00 [0..1] rid=10 1x1 parent=-
+     #18 type5 0x00/0xffffffff [0..0] rid=11 0x1 parent=-
+     #17 type5 0x00/0x00 [0..1] rid=11 1x1 parent=-
+     #20 type5 0x00/0xffffffff [0..0] rid=68 0x1 parent=-
+     #19 type5 0x00/0x00 [0..1] rid=68 1x1 parent=-
+     #22 type5 0x00/0xffffffff [0..0] rid=1 0x1 parent=-
+     #21 type5 0x00/0x00 [0..1] rid=1 1x1 parent=-
+     #24 type5 0x00/0xffffffff [0..0] rid=5 0x1 parent=-
+     #23 type5 0x00/0x00 [0..1] rid=5 1x1 parent=-
+     #26 type5 0x00/0xffffffff [0..0] rid=2 0x1 parent=-
+     #25 type5 0x00/0x00 [0..1] rid=2 1x1 parent=-
+     #28 type5 0x00/0xffffffff [0..0] rid=3 0x1 parent=-
+     #27 type5 0x00/0x00 [0..1] rid=3 1x1 parent=-
+     #30 type5 0x00/0xffffffff [0..0] rid=4 0x1 parent=-
+     #29 type5 0x00/0x00 [0..1] rid=4 1x1 parent=-
+     #32 type5 0x00/0xffffffff [0..0] rid=6 0x1 parent=-
+     #31 type5 0x00/0x00 [0..1] rid=6 1x1 parent=-
+     #34 type5 0x00/0xffffffff [0..0] rid=7 0x1 parent=-
+     #33 type5 0x00/0x00 [0..1] rid=7 1x1 parent=-
+     #36 type5 0x00/0xffffffff [0..0] rid=8 0x1 parent=-
+     #35 type5 0x00/0x00 [0..1] rid=8 1x1 parent=-
+     #38 type5 0x00/0xffffffff [0..0] rid=9 0x1 parent=-
+     #37 type5 0x00/0x00 [0..1] rid=9 1x1 parent=-
+── 05ac:0281  "Magic Trackpad 2"  maker="Apple Inc."  transport=I2C  location=0x14400000
+   primary=0xff00/0x0d
+   usagePairs=[0xff00/0x0d]
+── 05ac:0281  "Magic Trackpad 2"  maker="Apple Inc."  transport=I2C  location=0x14400000
+   primary=0xff00/0x0d
+   usagePairs=[0xff00/0x0d]
+
+Kandidat touchscreen: 2386:3118 "?"

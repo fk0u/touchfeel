@@ -25,8 +25,9 @@ public struct HIDElementValue: Equatable, Sendable {
 /// Groups element values into TouchFrames. Values of one input report share a timestamp,
 /// so a timestamp change closes the frame; `flush()` closes it on idle.
 ///
-/// Unused finger slots (tip off, never seen touching) are dropped. A slot whose id was
-/// touching in an earlier frame and now reports tip off is emitted once as a lift.
+/// IOKit only delivers values that changed, so slot state persists across frames: a finger
+/// that holds still still appears in every frame. Slots that never reported tip on are skipped;
+/// a slot whose tip goes off is emitted once with `isTouching == false`.
 public struct FrameAssembler: Sendable {
     private struct Slot: Sendable {
         var id: Int?
@@ -35,12 +36,12 @@ public struct FrameAssembler: Sendable {
         var width: Double?
         var height: Double?
         var tip: Bool?
+        var wasTouching = false
     }
 
     private var slots: [Int: Slot] = [:]
     private var slotOrder: [Int] = []
     private var currentTimestamp: UInt64?
-    private var activeIDs: Set<Int> = []
 
     public init() {}
 
@@ -53,48 +54,38 @@ public struct FrameAssembler: Sendable {
         }
         currentTimestamp = v.timestampNs
 
-        let field: WritableKeyPath<Slot, Double?>?
         switch (v.usagePage, v.usage) {
-        case (HIDUsage.pageGenericDesktop, HIDUsage.x): field = \.x
-        case (HIDUsage.pageGenericDesktop, HIDUsage.y): field = \.y
-        case (HIDUsage.pageDigitizer, HIDUsage.width): field = \.width
-        case (HIDUsage.pageDigitizer, HIDUsage.height): field = \.height
-        case (HIDUsage.pageDigitizer, HIDUsage.contactID):
-            update(v.slot) { $0.id = v.value }
-            return finished
-        case (HIDUsage.pageDigitizer, HIDUsage.tipSwitch):
-            update(v.slot) { $0.tip = v.value != 0 }
-            return finished
-        default:
-            return finished
-        }
-        if let field, let n = Self.normalize(v) {
-            update(v.slot) { $0[keyPath: field] = n }
+        case (HIDUsage.pageGenericDesktop, HIDUsage.x): set(v, \.x)
+        case (HIDUsage.pageGenericDesktop, HIDUsage.y): set(v, \.y)
+        case (HIDUsage.pageDigitizer, HIDUsage.width): set(v, \.width)
+        case (HIDUsage.pageDigitizer, HIDUsage.height): set(v, \.height)
+        case (HIDUsage.pageDigitizer, HIDUsage.contactID): update(v.slot) { $0.id = v.value }
+        case (HIDUsage.pageDigitizer, HIDUsage.tipSwitch): update(v.slot) { $0.tip = v.value != 0 }
+        default: break
         }
         return finished
     }
 
     public mutating func flush() -> TouchFrame? {
         guard let ts = currentTimestamp else { return nil }
-        var contacts: [Contact] = []
-        var nowActive = activeIDs
-        for key in slotOrder {
-            guard let s = slots[key], let id = s.id, let x = s.x, let y = s.y else { continue }
-            let touching = s.tip ?? true
-            if touching {
-                nowActive.insert(id)
-            } else if activeIDs.contains(id) {
-                nowActive.remove(id)
-            } else {
-                continue
-            }
-            contacts.append(Contact(id: id, x: x, y: y, width: s.width, height: s.height, isTouching: touching))
-        }
-        activeIDs = nowActive
-        slots.removeAll(keepingCapacity: true)
-        slotOrder.removeAll(keepingCapacity: true)
         currentTimestamp = nil
+        var contacts: [Contact] = []
+        for key in slotOrder {
+            guard var s = slots[key] else { continue }
+            // Panels without a Tip Switch: a slot with coordinates counts as touching.
+            let touching = s.tip ?? (s.x != nil && s.y != nil)
+            if let id = s.id, let x = s.x, let y = s.y, touching || s.wasTouching {
+                contacts.append(Contact(id: id, x: x, y: y, width: s.width, height: s.height, isTouching: touching))
+            }
+            s.wasTouching = touching
+            slots[key] = s
+        }
         return contacts.isEmpty ? nil : TouchFrame(timestampNs: ts, contacts: contacts)
+    }
+
+    private mutating func set(_ v: HIDElementValue, _ field: WritableKeyPath<Slot, Double?>) {
+        guard let n = Self.normalize(v) else { return }
+        update(v.slot) { $0[keyPath: field] = n }
     }
 
     private mutating func update(_ key: Int, _ body: (inout Slot) -> Void) {

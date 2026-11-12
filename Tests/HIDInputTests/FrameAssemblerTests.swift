@@ -31,10 +31,22 @@ final class FrameAssemblerTests: XCTestCase {
         var a = FrameAssembler()
         _ = feed(&a, finger(slot: 10, id: 1, tip: true, x: 0, y: 0, ts: 1) + finger(slot: 20, id: 0, tip: false, x: 0, y: 0, ts: 1))
         XCTAssertEqual(a.flush()?.contacts.map(\.id), [1])
-        _ = feed(&a, finger(slot: 10, id: 1, tip: false, x: 0, y: 0, ts: 2))
+        _ = feed(&a, [HIDElementValue(slot: 10, usagePage: 0x0D, usage: 0x42, value: 0, logicalMin: 0, logicalMax: 1, timestampNs: 2)])
         XCTAssertEqual(a.flush()?.contacts, [Contact(id: 1, x: 0, y: 0, isTouching: false)])
-        _ = feed(&a, finger(slot: 10, id: 1, tip: false, x: 0, y: 0, ts: 3))
+        _ = feed(&a, [HIDElementValue(slot: 1, usagePage: 0x0D, usage: 0x56, value: 7, logicalMin: 0, logicalMax: 99, timestampNs: 3)])
         XCTAssertNil(a.flush())
+    }
+
+    /// IOKit only reports changed values: a finger moving only in X keeps its id, tip and Y.
+    func testUnchangedValuesPersistAcrossFrames() {
+        var a = FrameAssembler()
+        _ = feed(&a, finger(slot: 10, id: 4, tip: true, x: 1000, y: 1000, ts: 1))
+        _ = a.flush()
+        _ = feed(&a, [HIDElementValue(slot: 10, usagePage: 0x01, usage: 0x30, value: 2000, logicalMin: 0, logicalMax: 4000, timestampNs: 2)])
+        XCTAssertEqual(a.flush(), TouchFrame(timestampNs: 2, contacts: [Contact(id: 4, x: 0.5, y: 0.5, isTouching: true)]))
+        // Stationary finger: only Scan Time changes, contact still reported.
+        _ = feed(&a, [HIDElementValue(slot: 1, usagePage: 0x0D, usage: 0x56, value: 9, logicalMin: 0, logicalMax: 99, timestampNs: 3)])
+        XCTAssertEqual(a.flush()?.contacts.count, 1)
     }
 
     func testNormalizationClampsAndRejectsBadRange() {
