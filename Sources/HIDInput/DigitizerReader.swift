@@ -17,6 +17,11 @@ public final class DigitizerReader: @unchecked Sendable {
     private var lastValueNs: UInt64 = 0
     private var flushTimer: Timer?
 
+    /// IOKit can still deliver a queued value for a callback context after the device is closed
+    /// (seen on L390 when the same device is reopened with seize). Readers are therefore never
+    /// freed: a stale callback always lands on a live, closed reader and is ignored.
+    nonisolated(unsafe) private static var retained: [DigitizerReader] = []
+
     public init(device: IOHIDDevice,
                 onValue: ((HIDElementValue, HIDElementInfo) -> Void)? = nil,
                 onFrame: @escaping (TouchFrame) -> Void) {
@@ -30,6 +35,7 @@ public final class DigitizerReader: @unchecked Sendable {
         let r = IOHIDDeviceOpen(device, options)
         guard r == kIOReturnSuccess else { return r }
         isOpen = true
+        Self.retained.append(self)
         IOHIDDeviceRegisterInputValueCallback(device, { ctx, _, _, value in
             guard let ctx else { return }
             Unmanaged<DigitizerReader>.fromOpaque(ctx).takeUnretainedValue().handle(value)
@@ -54,6 +60,7 @@ public final class DigitizerReader: @unchecked Sendable {
     }
 
     private func handle(_ value: IOHIDValue) {
+        guard isOpen else { return }
         valueCount += 1
         let element = IOHIDValueGetElement(value)
         let cookie = Int(IOHIDElementGetCookie(element))
