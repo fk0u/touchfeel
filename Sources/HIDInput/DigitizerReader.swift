@@ -36,6 +36,7 @@ public final class DigitizerReader: @unchecked Sendable {
         guard r == kIOReturnSuccess else { return r }
         isOpen = true
         Self.retained.append(self)
+        primeFromCurrentValues()
         IOHIDDeviceRegisterInputValueCallback(device, { ctx, _, _, value in
             guard let ctx else { return }
             Unmanaged<DigitizerReader>.fromOpaque(ctx).takeUnretainedValue().handle(value)
@@ -57,6 +58,21 @@ public final class DigitizerReader: @unchecked Sendable {
         IOHIDDeviceUnscheduleFromRunLoop(device, CFRunLoopGetMain(), CFRunLoopMode.defaultMode.rawValue)
         IOHIDDeviceClose(device, IOOptionBits(kIOHIDOptionsTypeNone))
         isOpen = false
+    }
+
+    private func primeFromCurrentValues() {
+        for info in HIDElements.all(of: device) where info.type != kIOHIDElementTypeCollection {
+            let current: IOHIDValue? = withUnsafeTemporaryAllocation(of: Unmanaged<IOHIDValue>.self, capacity: 1) { buf in
+                guard let p = buf.baseAddress, IOHIDDeviceGetValue(device, info.element, p) == kIOReturnSuccess else { return nil }
+                return p.pointee.takeUnretainedValue()
+            }
+            guard let value = current else { continue }
+            elementCache[info.cookie] = info
+            assembler.prime(HIDElementValue(
+                slot: info.parentCookie ?? -1, usagePage: info.usagePage, usage: info.usage,
+                value: IOHIDValueGetIntegerValue(value),
+                logicalMin: info.logicalMin, logicalMax: info.logicalMax, timestampNs: 0))
+        }
     }
 
     private func handle(_ value: IOHIDValue) {

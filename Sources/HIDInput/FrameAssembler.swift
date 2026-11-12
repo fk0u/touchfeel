@@ -53,7 +53,18 @@ public struct FrameAssembler: Sendable {
             finished = flush()
         }
         currentTimestamp = v.timestampNs
+        apply(v)
+        return finished
+    }
 
+    /// Seeds slot state (e.g. element values read right after opening the device) without
+    /// starting a frame. Needed because IOKit only reports changes: a Contact ID equal to the
+    /// last one before the device was opened is never delivered again.
+    public mutating func prime(_ v: HIDElementValue) {
+        apply(v)
+    }
+
+    private mutating func apply(_ v: HIDElementValue) {
         switch (v.usagePage, v.usage) {
         case (HIDUsage.pageGenericDesktop, HIDUsage.x): set(v, \.x)
         case (HIDUsage.pageGenericDesktop, HIDUsage.y): set(v, \.y)
@@ -63,7 +74,6 @@ public struct FrameAssembler: Sendable {
         case (HIDUsage.pageDigitizer, HIDUsage.tipSwitch): update(v.slot) { $0.tip = v.value != 0 }
         default: break
         }
-        return finished
     }
 
     public mutating func flush() -> TouchFrame? {

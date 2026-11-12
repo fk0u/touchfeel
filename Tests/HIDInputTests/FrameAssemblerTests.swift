@@ -59,4 +59,17 @@ final class FrameAssemblerTests: XCTestCase {
         ])
         XCTAssertEqual(a.flush()?.contacts, [Contact(id: 5, x: 1, y: 0.5, width: nil, isTouching: true)])
     }
+
+    /// A new touch reusing the previous Contact ID only sends Tip + X/Y; primed state supplies the id.
+    func testPrimedContactIDIsUsed() {
+        var a = FrameAssembler()
+        a.prime(HIDElementValue(slot: 10, usagePage: 0x0D, usage: 0x51, value: 1, logicalMin: 0, logicalMax: 31, timestampNs: 0))
+        XCTAssertFalse(a.hasPending)
+        _ = feed(&a, [
+            HIDElementValue(slot: 10, usagePage: 0x0D, usage: 0x42, value: 1, logicalMin: 0, logicalMax: 1, timestampNs: 5),
+            HIDElementValue(slot: 10, usagePage: 0x01, usage: 0x30, value: 0, logicalMin: 0, logicalMax: 100, timestampNs: 5),
+            HIDElementValue(slot: 10, usagePage: 0x01, usage: 0x31, value: 0, logicalMin: 0, logicalMax: 100, timestampNs: 5),
+        ])
+        XCTAssertEqual(a.flush()?.contacts.map(\.id), [1])
+    }
 }
